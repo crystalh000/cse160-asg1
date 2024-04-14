@@ -76,6 +76,7 @@ const CIRCLE = 2;
 let g_selectedColor = [1.0,1.0,1.0,1.0]; // Default white
 let g_selectedSize = 5;
 let g_selectedType = POINT;
+let g_selectedSegments = 10;
 
 // Set up actions for the HTML UI elements
 function addActionsForHTMLUI() {
@@ -90,12 +91,16 @@ function addActionsForHTMLUI() {
   document.getElementById('circleButton').onclick = function() {g_selectedType=CIRCLE};
 
   // Slider Events
-  document.getElementById('redSlide').addEventListener('mouseup', function() { g_selectedColor[0] = this.value/100;   });
-  document.getElementById('greenSlide').addEventListener('mouseup', function() { g_selectedColor[1] = this.value/100; });
-  document.getElementById('blueSlide').addEventListener('mouseup',  function() { g_selectedColor[2] = this.value/100;  });
+  document.getElementById('redSlide').addEventListener('input', function() { g_selectedColor[0] = this.value/100;   });
+  document.getElementById('greenSlide').addEventListener('input', function() { g_selectedColor[1] = this.value/100; });
+  document.getElementById('blueSlide').addEventListener('input',  function() { g_selectedColor[2] = this.value/100;  });
 
   // Size Slider Events
-  document.getElementById('sizeSlide').addEventListener('mouseup', function() { g_selectedSize = this.value });
+  document.getElementById('sizeSlide').addEventListener('input', function() { g_selectedSize = this.value });
+
+  // Segment Slider Events
+  // document.getElementById('segmentsSlide').addEventListener('input', function() { g_selectedSegments = this.value });
+  document.getElementById('segmentsSlide').addEventListener('input', function() { g_selectedSegments = parseInt(this.value); });
 
 }
 function main() {
@@ -139,6 +144,7 @@ function click(ev) {
     point = new Triangle();
   } else {
     point = new Circle();
+    point.segments = g_selectedSegments;
   }
   point.position = [x,y];
   point.color = g_selectedColor.slice();
