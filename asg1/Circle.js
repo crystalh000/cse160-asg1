@@ -28,6 +28,7 @@ class Circle {
             let pt2 = [centerPt[0]+vec2[0], centerPt[1]+vec2[1]];
 
             drawTriangle([xy[0], xy[1], pt1[0], pt1[1], pt2[0], pt2[1]] );
+            
         }
     }
 }
