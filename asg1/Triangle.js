@@ -22,7 +22,8 @@ class Triangle{
         
         // Draw
         //   gl.drawArrays(gl.POINTS, 0, 1);
-        drawTriangle([xy[0],xy[1],xy[0]+ .1,xy[1],xy[0],xy[1]+.1])
+        var d = this.size/200.0; // delta
+        drawTriangle([xy[0],xy[1],xy[0]+ d,xy[1],xy[0],xy[1]+d])
     }
 }
 
@@ -43,7 +44,7 @@ function drawTriangle(vertices) {
     // Bind the buffer object to target
     gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
     // Write date into the buffer object
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices),gl.STATIC_DRAW);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(vertices),gl.DYNAMIC_DRAW);
   
     // gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
   
@@ -53,7 +54,7 @@ function drawTriangle(vertices) {
     //   return -1;
     // }
 
-    
+
 
     // Assign the buffer object to a_Position variable
     gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0);
