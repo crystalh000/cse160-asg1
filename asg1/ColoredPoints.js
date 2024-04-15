@@ -1,3 +1,7 @@
+
+// Import the drawPicture function from Picture.js
+// import { drawPicture } from './Picture.js';
+
 // ColoredPoint.js (c) 2012 matsuda
 // Vertex shader program
 var VSHADER_SOURCE = `
@@ -71,6 +75,7 @@ function connectVariablesToGLSL() {
 const POINT = 0;
 const TRIANGLE = 1;
 const CIRCLE = 2;
+const PICTURE = 3;
 
 // Globals related to UI elements
 let g_selectedColor = [1.0,1.0,1.0,1.0]; // Default white
@@ -89,6 +94,8 @@ function addActionsForHTMLUI() {
   document.getElementById('pointButton').onclick = function() {g_selectedType=POINT};
   document.getElementById('triButton').onclick = function() {g_selectedType=TRIANGLE};
   document.getElementById('circleButton').onclick = function() {g_selectedType=CIRCLE};
+
+  document.getElementById('drawPictureButton').onclick = drawPicture; 
 
   // Slider Events
   document.getElementById('redSlide').addEventListener('input', function() { g_selectedColor[0] = this.value/100;   });
@@ -142,9 +149,12 @@ function click(ev) {
     point = new Point();
   } else if (g_selectedType == TRIANGLE) {
     point = new Triangle();
-  } else {
+  } else if (g_selectedType == CIRCLE){
     point = new Circle();
     point.segments = g_selectedSegments;
+  } else if (g_selectedType == PICTURE){
+    point = new Picture();
+
   }
   point.position = [x,y];
   point.color = g_selectedColor.slice();
